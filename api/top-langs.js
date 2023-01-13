@@ -46,7 +46,7 @@ export default async (req, res) => {
       parseArray(exclude_repo),
     );
     
-    console.log(topLangs);
+    console.log(topLangs, 'asd');
 
     const cacheSeconds = clampValue(
       parseInt(cache_seconds || CONSTANTS.FOUR_HOURS, 10),
