@@ -45,6 +45,8 @@ export default async (req, res) => {
       username,
       parseArray(exclude_repo),
     );
+    
+    console.log(topLangs);
 
     const cacheSeconds = clampValue(
       parseInt(cache_seconds || CONSTANTS.FOUR_HOURS, 10),
@@ -54,12 +56,9 @@ export default async (req, res) => {
 
     res.setHeader(
       "Cache-Control",
-      `public, max-age=${cacheSeconds / 2}, s-maxage=${cacheSeconds}, stale-while-revalidate=${CONSTANTS.ONE_DAY}`,
-    );
-    
-    res.setHeader(
-      "Cache-Control",
-      `private, max-age=${cacheSeconds / 2}, s-maxage=${cacheSeconds}, stale-while-revalidate=${CONSTANTS.ONE_DAY}`,
+      `max-age=${
+        cacheSeconds / 2
+      }, s-maxage=${cacheSeconds}, stale-while-revalidate=${CONSTANTS.ONE_DAY}`,
     );
 
     return res.send(
